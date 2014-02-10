@@ -1,6 +1,3 @@
-simple-websocket-client
-=======================
-
 # Simple WebSocket Client [![Build Status](https://travis-ci.org/matzew/simple-websocket-client.png)](https://travis-ci.org/matzew/simple-websocket-client)
 
 
