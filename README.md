@@ -3,11 +3,23 @@
 
 The JSR 356 describes a standard API for WebSocket Server and clients.
 
-This is a simplified version of a WebSocket client, based on the JSR client APIs, basically hiding some of the standard APIs for an easy and simple usage:
+## Get started
 
+Add the following to your ```pom.xml``` file:
+
+```
+<dependency>
+  <groupId>net.wessendorf.websocket</groupId>
+  <artifactId>simple-client</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+The library is a simplified version of a WebSocket client, based on the JSR 356 client APIs, basically hiding some of the standard APIs for an easy and simple usage:
 
 ```java
-final SimpleWebSocketClient client = new SimpleWebSocketClient("ws://localhost:9999/echo");
+final SimpleWebSocketClient client =
+      new SimpleWebSocketClient("ws://localhost:9999/echo");
 
 client.setWebSocketHandler(new WebSocketHandlerAdapter() {
   @Override
