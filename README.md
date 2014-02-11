@@ -7,8 +7,7 @@ This is a simplified version of a WebSocket client, based on the JSR client APIs
 
 
 ```java
-final URI securedEndpointURL = new URI("ws://localhost:9999/echo");
-final SimpleWebSocketClient client = new SimpleWebSocketClient(securedEndpointURL);
+final SimpleWebSocketClient client = new SimpleWebSocketClient("ws://localhost:9999/echo");
 
 client.setWebSocketHandler(new WebSocketHandlerAdapter() {
   @Override
