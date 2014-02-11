@@ -8,12 +8,12 @@ This is a simplified version of a WebSocket client, based on the JSR client APIs
 
 ```java
 final URI securedEndpointURL = new URI("ws://localhost:9999/echo");
-final SimpleWebSocketClient spc = new SimpleWebSocketClient(securedEndpointURL);
+final SimpleWebSocketClient client = new SimpleWebSocketClient(securedEndpointURL);
 
-spc.setWebSocketHandler(new WebSocketHandlerAdapter() {
+client.setWebSocketHandler(new WebSocketHandlerAdapter() {
   @Override
   public void onOpen() {
-    spc.sendText("Hello"); // ship it!
+    client.sendText("Hello"); // ship it!
   }
 
   @Override
@@ -22,12 +22,12 @@ spc.setWebSocketHandler(new WebSocketHandlerAdapter() {
     assertThat(message).isEqualTo("Hello");
 
     // close it now:
-    spc.close();
+    client.close();
   }
 });
 
 // connect
-spc.connect();
+client.connect();
 ```
 
 Have fun!
