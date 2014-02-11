@@ -26,7 +26,7 @@
   <groupId>net.wessendorf.websocket</groupId>
   <artifactId>simple-client</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <name>simple-client</name>
   <description>A simple WebSocket Java client based on JSR 356</description>
 
