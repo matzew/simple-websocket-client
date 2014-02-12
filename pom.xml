@@ -65,12 +65,12 @@
       <dependency>
           <groupId>org.glassfish.tyrus</groupId>
           <artifactId>tyrus-client</artifactId>
-          <version>1.4</version>
+          <version>${tyrus.version}</version>
       </dependency>
       <dependency>
           <groupId>org.glassfish.tyrus</groupId>
           <artifactId>tyrus-container-grizzly-client</artifactId>
-          <version>1.4</version>
+          <version>${tyrus.version}</version>
       </dependency>
 
       <!-- all the test things -->
@@ -89,14 +89,20 @@
       <dependency>
           <groupId>io.undertow</groupId>
           <artifactId>undertow-core</artifactId>
-          <version>1.0.0.CR5</version>
+          <version>${undertow.version}</version>
           <scope>test</scope>
       </dependency>
       <dependency>
           <groupId>io.undertow</groupId>
           <artifactId>undertow-websockets-jsr</artifactId>
-          <version>1.0.0.CR5</version>
+          <version>${undertow.version}</version>
           <scope>test</scope>
       </dependency>
   </dependencies>
+
+  <properties>
+      <undertow.version>1.0.0.Final</undertow.version>
+      <tyrus.version>1.4</tyrus.version>
+  </properties>
+
 </project>
