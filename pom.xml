@@ -55,7 +55,7 @@
     <!--dependency>
       <groupId>io.undertow</groupId>
       <artifactId>undertow-websockets-jsr</artifactId>
-      <version>1.0.0.CR5</version>
+      <version>${undertow.version}</version>
     </dependency-->
       <dependency>
           <groupId>javax.websocket</groupId>
@@ -100,7 +100,21 @@
       </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <undertow.version>1.0.0.Final</undertow.version>
       <tyrus.version>1.4</tyrus.version>
   </properties>

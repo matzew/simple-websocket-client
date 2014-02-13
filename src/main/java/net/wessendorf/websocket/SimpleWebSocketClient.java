@@ -55,8 +55,9 @@ public class SimpleWebSocketClient {
     /**
      * Creates new WebSocket client for given address
      */
-    public SimpleWebSocketClient(final URI websocketURI) {
-        this.websocketURI =  websocketURI;
+    public SimpleWebSocketClient(final URI websocketURI) throws URISyntaxException {
+        this.websocketURI =  WebSocketUtil.applyDefaultPorts(websocketURI);
+
     }
 
 
