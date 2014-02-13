@@ -65,6 +65,11 @@ public class WebSocketUtilTest {
         URI wrongURI = new URI("ws://localhost/echo");
         assertThat(WebSocketUtil.applyDefaultPorts(wrongURI).getPort()).isEqualTo(80);
     }
+    @Test
+    public void convertWS_SchemeInURIwithNoPath() throws URISyntaxException {
+        URI wrongURI = new URI("ws://localhost");
+        assertThat(WebSocketUtil.applyDefaultPorts(wrongURI).getPort()).isEqualTo(80);
+    }
 
     @Test
     public void convertWSS_SchemeInURI() throws URISyntaxException {
