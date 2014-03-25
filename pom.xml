@@ -115,8 +115,8 @@
 
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <undertow.version>1.0.1.Final</undertow.version>
-      <tyrus.version>1.4</tyrus.version>
+      <undertow.version>1.0.2.Final</undertow.version>
+      <tyrus.version>1.5</tyrus.version>
   </properties>
 
 </project>
