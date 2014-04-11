@@ -24,7 +24,7 @@ final SimpleWebSocketClient client =
 client.setWebSocketHandler(new WebSocketHandlerAdapter() {
   @Override
   public void onOpen() {
-    client.sendText("Hello"); // ship it!
+    client.sendText("Hello"); // ship it!!
   }
 
   @Override
