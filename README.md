@@ -1,7 +1,7 @@
 # Simple WebSocket Client [![Build Status](https://travis-ci.org/matzew/simple-websocket-client.png)](https://travis-ci.org/matzew/simple-websocket-client)
 
 
-The JSR 356 describes a standard API for WebSocket Server and clients.
+The JSR 356 describes a standard API for WebSocket Server and clients, but the client API is very complex. This project aims to offer a simplified client.
 
 ## Get started
 
