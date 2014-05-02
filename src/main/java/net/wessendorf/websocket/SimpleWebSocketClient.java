@@ -15,9 +15,9 @@
  */
 package net.wessendorf.websocket;
 
+import javax.websocket.ClientEndpointConfig;
 import javax.websocket.CloseReason;
 import javax.websocket.ContainerProvider;
-import javax.websocket.DeploymentException;
 import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfig;
 import javax.websocket.MessageHandler;
@@ -79,7 +79,7 @@ public class SimpleWebSocketClient {
                 webSocketHandler = new WebSocketHandlerAdapter();
             }
 
-            container.connectToServer(new SimpleWebSocketClientEndpoint(), websocketURI);
+            container.connectToServer(new SimpleWebSocketClientEndpoint(), ClientEndpointConfig.Builder.create().build(), websocketURI);
         } catch (Exception e) {
 
             // throws DeploymentException, IOException
@@ -93,7 +93,7 @@ public class SimpleWebSocketClient {
      */
     public void close() {
         try {
-            webSocketSession.close();
+            webSocketSession.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, null));
         } catch (IOException e) {
             e.printStackTrace();
         }
