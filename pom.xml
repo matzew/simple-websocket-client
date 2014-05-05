@@ -98,6 +98,19 @@
           <version>${undertow.version}</version>
           <scope>test</scope>
       </dependency>
+      <dependency>
+          <groupId>org.glassfish.tyrus</groupId>
+          <artifactId>tyrus-server</artifactId>
+          <version>${tyrus.version}</version>
+          <scope>test</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>org.glassfish.tyrus</groupId>
+          <artifactId>tyrus-container-grizzly-server</artifactId>
+          <version>${tyrus.version}</version>
+          <scope>test</scope>
+      </dependency>
   </dependencies>
 
   <build>

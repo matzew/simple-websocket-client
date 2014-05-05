@@ -15,65 +15,17 @@
  */
 package net.wessendorf.websocket;
 
-import io.undertow.Undertow;
-import io.undertow.websockets.WebSocketConnectionCallback;
-import io.undertow.websockets.core.AbstractReceiveListener;
-import io.undertow.websockets.core.BufferedBinaryMessage;
-import io.undertow.websockets.core.BufferedTextMessage;
-import io.undertow.websockets.core.WebSocketChannel;
-import io.undertow.websockets.core.WebSockets;
-import io.undertow.websockets.spi.WebSocketHttpExchange;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static io.undertow.Handlers.path;
-import static io.undertow.Handlers.websocket;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SimpleWebSocketClientTest {
-
-    private Undertow server;
-
-    @Before
-    public void bootUndertow() {
-        server = Undertow.builder()
-                .addHttpListener(9999, "localhost")
-                .setHandler(path()
-                        .addPrefixPath("/echo", websocket(new WebSocketConnectionCallback() {
-
-                            @Override
-                            public void onConnect(WebSocketHttpExchange exchange, WebSocketChannel channel) {
-                                channel.getReceiveSetter().set(new AbstractReceiveListener() {
-
-                                    @Override
-                                    protected void onFullTextMessage(WebSocketChannel channel, BufferedTextMessage message) {
-                                        WebSockets.sendText(message.getData(), channel, null);
-                                    }
-
-                                    @Override
-                                    protected void onFullBinaryMessage(WebSocketChannel channel, BufferedBinaryMessage message) throws IOException {
-                                        WebSockets.sendBinary(message.getData().getResource(), channel, null);
-                                    }
-                                });
-                                channel.resumeReceives();
-                            }
-                        }))).build();
-        server.start();
-    }
-
-    @After
-    public void shutdownUndertow() {
-        server.stop();
-    }
-
+public abstract class AbstractSimpleClientTest {
 
     @Test
     public void simpleBinaryEcho() throws InterruptedException, URISyntaxException {
@@ -175,4 +127,6 @@ public class SimpleWebSocketClientTest {
 
         spc.connect();
     }
+
+
 }
