@@ -24,24 +24,18 @@ import io.undertow.websockets.core.WebSocketChannel;
 import io.undertow.websockets.core.WebSockets;
 import io.undertow.websockets.spi.WebSocketHttpExchange;
 import net.wessendorf.websocket.AbstractSimpleClientTest;
-import net.wessendorf.websocket.SimpleWebSocketClient;
-import net.wessendorf.websocket.WebSocketHandlerAdapter;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import static io.undertow.Handlers.path;
 import static io.undertow.Handlers.websocket;
-import static org.assertj.core.api.Assertions.assertThat;
 
-public class UndertowContainer extends AbstractSimpleClientTest {
+public class UndertowContainerTest extends AbstractSimpleClientTest {
+
+    private static final Logger LOGGER = Logger.getLogger(UndertowContainerTest.class.getName());
 
     private Undertow server;
 
@@ -58,11 +52,13 @@ public class UndertowContainer extends AbstractSimpleClientTest {
 
                                     @Override
                                     protected void onFullTextMessage(WebSocketChannel channel, BufferedTextMessage message) {
+                                        LOGGER.info("Received Text Message");
                                         WebSockets.sendText(message.getData(), channel, null);
                                     }
 
                                     @Override
                                     protected void onFullBinaryMessage(WebSocketChannel channel, BufferedBinaryMessage message) throws IOException {
+                                        LOGGER.info("Received Binary Message");
                                         WebSockets.sendBinary(message.getData().getResource(), channel, null);
                                     }
                                 });

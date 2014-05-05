@@ -22,7 +22,7 @@ import org.junit.Before;
 
 import javax.websocket.DeploymentException;
 
-public class TyrusContainer extends AbstractSimpleClientTest {
+public class TyrusContainerTest extends AbstractSimpleClientTest {
 
     private Server server;
 

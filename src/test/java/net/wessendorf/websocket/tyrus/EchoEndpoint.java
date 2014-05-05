@@ -20,17 +20,22 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.logging.Logger;
 
 @ServerEndpoint("/echo")
 public class EchoEndpoint {
 
+    private static final Logger LOGGER = Logger.getLogger(EchoEndpoint.class.getName());
+
     @OnMessage
     public void receiveTextMessage(String message, Session session) throws IOException {
+        LOGGER.info("Received Text Message");
         session.getBasicRemote().sendText(message);
     }
 
     @OnMessage
     public void receiveBinaryMessage(ByteBuffer message, Session session) throws IOException {
+        LOGGER.info("Received Binary Message");
         session.getBasicRemote().sendBinary(message);
     }
 }
