@@ -39,6 +39,9 @@ client.setWebSocketHandler(new WebSocketHandlerAdapter() {
 
 // connect
 client.connect();
+
+//send a text:
+client.sendText("Hello again!");
 ```
 
 Have fun!
