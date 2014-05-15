@@ -145,12 +145,26 @@
     </plugins>
   </build>
 
+    <repositories>
+        <repository>
+            <id>snapshots-oss.sonatype.org</id>
+            <name>Sonatype Snapshots Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <undertow.version>1.0.8.Final</undertow.version>
       <tyrus.version>1.5</tyrus.version>
       <netty.version>4.0.19.Final</netty.version>
-      <vertx.version>2.1RC3</vertx.version>
+      <vertx.version>2.1RC4-SNAPSHOT</vertx.version>
   </properties>
 
 </project>

@@ -18,14 +18,15 @@ package net.wessendorf.websocket.vertx;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.Vertx;
 import org.vertx.java.core.VertxFactory;
+import org.vertx.java.core.buffer.Buffer;
 import org.vertx.java.core.http.HttpServer;
 import org.vertx.java.core.http.ServerWebSocket;
-import org.vertx.java.core.http.impl.ws.WebSocketFrame;
+import org.vertx.java.core.http.WebSocketFrame;
+import org.vertx.java.core.http.impl.ws.WebSocketFrameInternal;
 
 public class WebSocketServer {
 
     private HttpServer httpServer;
-    private ServerWebSocket webSocket;
     private Vertx vertx;
 
     public void start(int port) {
@@ -35,11 +36,20 @@ public class WebSocketServer {
         httpServer = vertx.createHttpServer();
         httpServer.websocketHandler(new Handler<ServerWebSocket>() {
             public void handle(final ServerWebSocket ws) {
-                webSocket = ws;
 
                 if (ws.path().equals("/echo")) {
 
-                    // add frameHandler once available....
+                    ws.frameHandler(new Handler<WebSocketFrame>() {
+                        @Override
+                        public void handle(WebSocketFrame webSocketFrame) {
+                            if (webSocketFrame.isBinary()) {
+                                Buffer buff = new Buffer(((WebSocketFrameInternal) webSocketFrame).getBinaryData());
+                                ws.writeBinaryFrame(buff);
+                            } else if (webSocketFrame.isText()) {
+                                ws.writeTextFrame(webSocketFrame.textData());
+                            }
+                        }
+                    });
 
                 } else {
                     ws.reject();
@@ -49,7 +59,6 @@ public class WebSocketServer {
     }
 
     public void stop() {
-        webSocket.close();
         httpServer.close();
 
     }
