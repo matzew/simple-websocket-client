@@ -36,6 +36,7 @@ public abstract class AbstractSimpleClientTest {
         spc.setWebSocketHandler(new WebSocketHandlerAdapter() {
             @Override
             public void onOpen() {
+                assertThat(spc.getReadyState()).isEqualTo(ReadyState.OPEN);
 
                 // create some bogus binary object...
                 ByteBuffer bb = ByteBuffer.allocate(128);
@@ -51,6 +52,7 @@ public abstract class AbstractSimpleClientTest {
 
             @Override
             public void onClose(int closeCode, String reason) {
+                assertThat(spc.getReadyState()).isEqualTo(ReadyState.CLOSED);
                 assertThat(closeCode).isEqualTo(1000);
 
                 // cause the shutdown
@@ -85,12 +87,14 @@ public abstract class AbstractSimpleClientTest {
         spc.setWebSocketHandler(new WebSocketHandlerAdapter() {
             @Override
             public void onOpen() {
+                assertThat(spc.getReadyState()).isEqualTo(ReadyState.OPEN);
 
                 spc.sendText("Hello"); // ship it!
             }
 
             @Override
             public void onClose(int closeCode, String reason) {
+                assertThat(spc.getReadyState()).isEqualTo(ReadyState.CLOSED);
                 assertThat(closeCode).isEqualTo(1000);
                 // cause the shutdown
                 closeLatch.countDown();
@@ -104,7 +108,6 @@ public abstract class AbstractSimpleClientTest {
                 spc.close();
             }
         });
-
 
         spc.connect();
 

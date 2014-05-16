@@ -40,8 +40,16 @@ public class SimpleWebSocketClient {
     private final URI websocketURI;
     private final WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 
+    private ReadyState readyState = ReadyState.CLOSED;
     private Session webSocketSession;
     private WebSocketHandler webSocketHandler;
+
+    /**
+     * The @{ReadyState} for the underlying connection
+     */
+    public ReadyState getReadyState() {
+        return readyState;
+    }
 
     /**
      * Applying the handler class to react on the different WebSocket events.
@@ -57,7 +65,6 @@ public class SimpleWebSocketClient {
      */
     public SimpleWebSocketClient(final URI websocketURI) throws URISyntaxException {
         this.websocketURI =  WebSocketUtil.applyDefaultPorts(websocketURI);
-
     }
 
 
@@ -74,6 +81,8 @@ public class SimpleWebSocketClient {
      */
     public void connect() {
 
+        readyState = ReadyState.CONNECTING;
+
         try {
             if (webSocketHandler == null) {
                 webSocketHandler = new WebSocketHandlerAdapter();
@@ -82,6 +91,7 @@ public class SimpleWebSocketClient {
             container.connectToServer(new SimpleWebSocketClientEndpoint(), ClientEndpointConfig.Builder.create().build(), websocketURI);
         } catch (Exception e) {
 
+            readyState = ReadyState.CLOSED;
             // throws DeploymentException, IOException
             throw new RuntimeException("could not establish connection");
 
@@ -92,6 +102,8 @@ public class SimpleWebSocketClient {
      * Shutting down the current connection.
      */
     public void close() {
+        readyState = ReadyState.CLOSING;
+
         try {
             webSocketSession.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, null));
         } catch (IOException e) {
@@ -139,6 +151,7 @@ public class SimpleWebSocketClient {
 
         @Override
         public void onOpen(final Session session, final EndpointConfig config) {
+            readyState = ReadyState.OPEN;
             webSocketSession = session;
 
             // callback:
@@ -163,10 +176,12 @@ public class SimpleWebSocketClient {
         }
 
         public void onClose(final Session session, final CloseReason closeReason) {
+            readyState = ReadyState.CLOSED;
             webSocketHandler.onClose(closeReason.getCloseCode().getCode(), closeReason.getReasonPhrase());
         }
 
         public void onError(final Session session, final Throwable throwable) {
+            readyState = ReadyState.CLOSED;
             throwable.printStackTrace();
             webSocketHandler.onError(throwable);
         }
