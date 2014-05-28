@@ -164,7 +164,7 @@
       <undertow.version>1.1.0.Beta1</undertow.version>
       <tyrus.version>1.6</tyrus.version>
       <netty.version>4.0.19.Final</netty.version>
-      <vertx.version>2.1RC4-SNAPSHOT</vertx.version>
+      <vertx.version>2.1</vertx.version>
   </properties>
 
 </project>
