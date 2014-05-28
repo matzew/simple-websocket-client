@@ -11,7 +11,7 @@ Add the following to your ```pom.xml``` file:
 <dependency>
   <groupId>net.wessendorf.websocket</groupId>
   <artifactId>simple-client</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
