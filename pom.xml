@@ -161,7 +161,7 @@
 
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <undertow.version>1.1.0.Beta1</undertow.version>
+      <undertow.version>1.1.0.Beta3</undertow.version>
       <tyrus.version>1.7</tyrus.version>
       <netty.version>4.0.21.Final</netty.version>
       <vertx.version>2.1.1</vertx.version>
