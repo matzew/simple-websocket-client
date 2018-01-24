@@ -1,5 +1,8 @@
 # Simple WebSocket Client [![Build Status](https://travis-ci.org/matzew/simple-websocket-client.png)](https://travis-ci.org/matzew/simple-websocket-client)
 
+## DEPRECATED
+
+Was a POC, that is no longer maintained.
 
 The JSR 356 describes a standard API for WebSocket Server and clients, but the client API is very complex. This project aims to offer a simplified client.
 
